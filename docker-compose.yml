@@ -5,4 +5,3 @@ services:
     shm_size: '1gb'
     volumes:
       - ./tmp/:/tmp/
-      - ./entrypoint.sh:/app/entrypoint.sh

@@ -73,20 +73,6 @@ RUN rm /tmp/geckodriver.tgz
 RUN chmod +x geckodriver
 RUN mv geckodriver /usr/bin/
 
-# Chrome Driver
-RUN wget -q "https://chromedriver.storage.googleapis.com/101.0.4951.15/chromedriver_linux64.zip" -O /tmp/chromedriver.zip
-RUN unzip /tmp/chromedriver.zip
-RUN rm /tmp/chromedriver.zip
-RUN chmod +x chromedriver
-RUN mv chromedriver /usr/bin/
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-RUN wget http://archive.ubuntu.com/ubuntu/pool/main/libu/libu2f-host/libu2f-udev_1.1.4-1_all.deb
-RUN dpkg -i libu2f-udev_1.1.4-1_all.deb
-RUN wget http://archive.ubuntu.com/ubuntu/pool/main/v/vulkan-loader/libvulkan1_1.2.131.2-1_amd64.deb
-RUN dpkg -i libvulkan1_1.2.131.2-1_amd64.deb
-RUN dpkg -i google-chrome-stable_current_amd64.deb
-RUN apt install ./google-chrome-stable_current_amd64.deb
-
 # Define environment variable
 ENV NAME openassessit
 
