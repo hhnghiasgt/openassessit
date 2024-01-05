@@ -77,4 +77,4 @@ RUN mv geckodriver /usr/bin/
 ENV NAME openassessit
 
 # Entrypoint
-ENTRYPOINT ["/app/entrypoint.sh"]
+ENTRYPOINT ["/app/openassessit/entrypoint.sh"]
