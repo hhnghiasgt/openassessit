@@ -59,10 +59,10 @@ RUN npm --global install -y lighthouse@10.4.0 \
     && npm cache clean --force
 
 # Clone OpenAssessIt repos
-RUN git clone https://github.com/hhnghiasgt/openassessit.git
+RUN git clone https://github.com/OpenAssessItToolkit/openassessit.git
 RUN git clone https://github.com/OpenAssessItToolkit/openassessit_templates.git
 
-# Install any needed packages specified in openassessits requirements.txt   
+# Install any needed packages specified in openassessits requirements.txt
 RUN pip3 install wheel
 RUN pip3 install -r openassessit/requirements.txt
 
@@ -73,8 +73,18 @@ RUN rm /tmp/geckodriver.tgz
 RUN chmod +x geckodriver
 RUN mv geckodriver /usr/bin/
 
+# Chrome Driver
+RUN wget -q "https://chromedriver.storage.googleapis.com/101.0.4951.15/chromedriver_linux64.zip" -O /tmp/chromedriver.zip
+RUN unzip /tmp/chromedriver.zip
+RUN rm /tmp/chromedriver.zip
+RUN chmod +x chromedriver
+RUN mv chromedriver /usr/bin/
+
 # Define environment variable
 ENV NAME openassessit
 
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+
 # Entrypoint
-ENTRYPOINT ["/app/openassessit/entrypoint.sh"]
+ENTRYPOINT ["/app/entrypoint.sh"]
