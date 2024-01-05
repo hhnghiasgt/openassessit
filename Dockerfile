@@ -59,7 +59,7 @@ RUN npm --global install -y lighthouse@10.4.0 \
     && npm cache clean --force
 
 # Clone OpenAssessIt repos
-RUN git clone https://github.com/hdkhoasgt/generate-accessibility-report.git
+RUN git clone https://github.com/hhnghiasgt/openassessit.git
 RUN git clone https://github.com/OpenAssessItToolkit/openassessit_templates.git
 
 # Install any needed packages specified in openassessits requirements.txt   
