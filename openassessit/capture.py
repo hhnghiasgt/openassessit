@@ -1,5 +1,7 @@
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
 from PIL import Image,ImageDraw
 from io import BytesIO
 import time
@@ -9,8 +11,8 @@ import os
 import json
 import sys
 import logging
-from .utils import initialize_logger, generate_img_filename, scroll_down, detect_full_html_loaded
-from .templates import template_path
+from utils import initialize_logger, generate_img_filename, scroll_down, detect_full_html_loaded
+from templates import template_path
 
 def get_args():
     example_text = '''
@@ -45,7 +47,8 @@ def get_chrome_driver():
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
     options.add_argument("--force-device-scale-factor=1")
-    return webdriver.Chrome(options=options, executable_path=ChromeDriverManager().install())
+    options.add_argument('--disable-dev-shm-usage')
+    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
 
 def create_backup_image(assets_dir, elem_identifier, elem_image_name):
@@ -84,7 +87,7 @@ def capture_element_pic(input_file, assets_dir, url, elem_identifier, lhIdee, sl
     try:
         driver.get(url)
         driver.set_window_size(1400, driver.execute_script("return document.body.parentNode.scrollHeight"))
-        elem = driver.find_element_by_css_selector(elem_identifier) # find element
+        elem = driver.find_element(By.CSS_SELECTOR, elem_identifier) # find element
         location = elem.location
         size = elem.size
         elem_image_name = generate_img_filename(url, elem_identifier, lhIdee)

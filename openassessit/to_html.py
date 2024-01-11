@@ -6,8 +6,8 @@ import io
 import sys
 import logging
 import markdown2
-from .utils import initialize_logger, readable_dir
-from .templates import template_path
+from utils import initialize_logger, readable_dir
+from templates import template_path
 
 SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
 
